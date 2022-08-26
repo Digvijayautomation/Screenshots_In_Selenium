@@ -1,5 +1,7 @@
+package screenshots;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Base64;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
@@ -9,9 +11,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class taking_screenshot_using_BYTES_method {
+public class taking_screenshot_using_BASE64_method {
 	
-static WebDriver driver;
+	static WebDriver driver;
 	
 	public static void main(String[] args) throws IOException {
 		WebDriverManager.chromedriver().setup();
@@ -26,15 +28,16 @@ static WebDriver driver;
 		
 
 		TakesScreenshot screen=(TakesScreenshot)driver; // Casting Takescreesnshot to driver
-		byte[] Base64screenshot=screen.getScreenshotAs(OutputType.BYTES); // it will store the screenshot in String
-		FileOutputStream fos=new FileOutputStream("./Screenshots/byte.jpeg"); 
-		fos.write(Base64screenshot); // Writing bytearray into fileoutputstream
+		String Base64screenshot=screen.getScreenshotAs(OutputType.BASE64); // it will store the screenshot in String
+		
+		byte[] bytearray=Base64.getDecoder().decode(Base64screenshot);// converting base64 to byte array
+		FileOutputStream fos=new FileOutputStream("./Screenshots/base64.jpeg"); 
+		fos.write(bytearray); // Writing bytearray into fileoutputstream
 		fos.close(); 
 		
 		
 		
 		driver.quit();
 	}
-
 
 }
