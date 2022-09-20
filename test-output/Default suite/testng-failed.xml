@@ -5,6 +5,7 @@
     <classes>
       <class name="screenshots_for_failed_tests.testcases">
         <methods>
+          <include name="test01"/>
           <include name="test02"/>
           <include name="setUp"/>
           <include name="teardown"/>
